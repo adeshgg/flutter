@@ -1,9 +1,27 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:myapp/pages/about_page.dart';
+import 'package:myapp/pages/home_page.dart';
+import 'package:myapp/pages/settings_page.dart';
 
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
+class FirstPage extends StatefulWidget {
+  FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  int _selectedPageIndex = 0;
+
+  void _handleNavigation(int index) {
+    setState(() {
+      _selectedPageIndex = index;
+    });
+  }
+
+  final List _pages = [HomePage(), SettingsPage(), AboutPage()];
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +30,17 @@ class FirstPage extends StatelessWidget {
         title: const Text("First Page"),
         backgroundColor: Colors.blue[300],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        // home
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
-      ]),
+      body: _pages[_selectedPageIndex],
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedPageIndex,
+          onTap: _handleNavigation,
+          items: [
+            // home
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: "Settings"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile")
+          ]),
     );
   }
 }
