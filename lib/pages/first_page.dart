@@ -13,7 +13,9 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  // variables defined inside an stateful Widget, are considered to states and you can change there value using setState()
+  // variables defined inside an stateful Widget, are considered to states and
+  //you can change there value using setState(), using setState() will also rebuild the Widget tree
+  // ensuring that the change is reflected in the UI
   int _selectedPageIndex = 0;
 
   void _handleNavigation(int index) {
